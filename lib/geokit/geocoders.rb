@@ -429,7 +429,7 @@ module Geokit
       def self.do_geocode(address, options = {})
         bias_str = options[:bias] ? construct_bias_string_from_options(options[:bias]) : ''
         address_str = address.is_a?(GeoLoc) ? address.to_geocodeable_s : address
-        res = self.call_geocoder_service("http://maps.googleapis.com/maps/api/geocode/xml?#{Geokit::Inflector::url_escape(address_str)}#{bias_str}&sensor=false")
+        res = self.call_geocoder_service("http://maps.googleapis.com/maps/api/geocode/xml?#{Geokit::Inflector::url_escape(address_str)}&sensor=false")
         return GeoLoc.new if !res.is_a?(Net::HTTPSuccess)
         xml = res.body
         logger.debug "Google geocoding. Address: #{address}. Result: #{xml}"
